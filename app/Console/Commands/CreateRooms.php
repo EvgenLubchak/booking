@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
@@ -12,7 +14,7 @@ class CreateRooms extends Command
      *
      * @var string
      */
-    protected $signature = 'create:rooms';
+    protected $signature = 'create:rooms {count}';
 
     /**
      * The console command description.
@@ -23,11 +25,19 @@ class CreateRooms extends Command
 
     /**
      * Execute the console command.
+     * Add more rooms to database
      *
      * @return int
      */
-    public function handle()
+    public function handle(): int
     {
-        Room::factory()->count(50)->create();
+        $cnt = intval($this->argument('count'));
+        $collection = Room::factory()->count($cnt)->create();
+        if ($collection->count()) {
+            $this->info($cnt . ' rooms added');
+        } else {
+            $this->info('oops something wrong');
+        }
+        return 0;
     }
 }

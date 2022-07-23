@@ -33,4 +33,6 @@ return [
         realpath(storage_path('framework/views'))
     ),
 
+    'date_format' => 'm/d/Y',
+    'date_range_separator' => ' - ',
 ];
