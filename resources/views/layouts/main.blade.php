@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Booking</title>
-    <script type="text/javascript" src="{{ url('/js/jquery321.min.js') }}" /></script>
-    <script type="text/javascript" src="{{ url('/js/momentjs2181.min.js') }}" /></script>
-    <script type="text/javascript" src="{{ url('/js/daterangepicker310.min.js') }}" /></script>
-    <link rel="stylesheet" type="text/css" href="{{ url('/css/daterangepicker310.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('/css/bootstrap520.css') }}" />
+    <script type="text/javascript" src="{{ url('/js/jquery.min.js') }}" /></script>
+    <script type="text/javascript" src="{{ url('/js/momentjs.min.js') }}" /></script>
+    <script type="text/javascript" src="{{ url('/js/daterangepicker.min.js') }}" /></script>
+    <link rel="stylesheet" type="text/css" href="{{ url('/css/daterangepicker.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url('/css/bootstrap.css') }}" />
 </head>
 <body >
 <main>
