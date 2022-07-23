@@ -10,14 +10,15 @@
 # Booking
 
 ## local project setup
+Laravel provides Sail, a built-in solution for running your Laravel project using Docker.
+<br>
 https://laravel.com/docs/9.x/installation#laravel-and-docker
 
 Tested on Linux and Docker Compose
+<br>
 https://laravel.com/docs/9.x/installation#getting-started-on-linux
-and
-https://docs.docker.com/compose/install/
 
-### Some setup commands
+### Some commands
 After the project has been created, you can navigate to the application directory and start Laravel Sail. 
 Laravel Sail provides a simple command-line interface for interacting with Laravel's default Docker configuration:
 ```
