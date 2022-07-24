@@ -7,15 +7,19 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class RoomFactory extends Factory
 {
     private const ROOMS_DEFAULT_NAMES = [
-        '1 bedroom',
+        'No bedroom',
         '2 bedroom',
+        'Gold bedroom',
+        'No closet',
+        '1 closet',
         'VIP',
-        'Superior',
-        'VIP 777',
-        'no bedroom',
-        'gold bedroom',
+        '777 VIP',
         'GOLD VIP',
+        'BRONZE VIP',
         'PLATINUM VIP',
+        'Good room',
+        'Bad room',
+        'Not so bad room',
     ];
 
     /**

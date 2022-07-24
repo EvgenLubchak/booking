@@ -7,8 +7,9 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Room ID</th>
-                <th scope="col">Room Name</th>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
                 <th scope="col">Reservation</th>
             </tr>
             </thead>
@@ -17,6 +18,7 @@
             <tr>
                 <td>{{ $room->id }}</td>
                 <td>{{ $room->name }}</td>
+                <td>{{ $room->price }} $</td>
                 <td>
                     <a href="{{route('reservation', ['room'=>$room->id])}}?date-range={{urlencode($date_range)}}">Reserve</a>
                 </td>

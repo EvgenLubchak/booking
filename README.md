@@ -7,7 +7,19 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# Booking
+# Booking BETA 0.1
+
+Features:
+<br>
+Room list by date range
+<br>
+Room reservation list by date range
+<br>
+Creating reservation
+<br>
+Deleting reservation
+<br>
+Creat rooms command
 
 ## local project setup
 Laravel provides Sail, a built-in solution for running your Laravel project using Docker.
