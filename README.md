@@ -19,7 +19,7 @@ Creating reservation
 <br>
 Deleting reservation
 <br>
-Creat rooms command
+Create rooms command
 
 ## local project setup
 Laravel provides Sail, a built-in solution for running your Laravel project using Docker.
