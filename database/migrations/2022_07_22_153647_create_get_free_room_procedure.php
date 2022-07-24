@@ -13,8 +13,8 @@ return new class extends Migration
     public function up()
     {
         $procedure = '
-            DROP PROCEDURE IF EXISTS `get_reserved_rooms_ids`;
-            CREATE PROCEDURE get_reserved_rooms_ids(IN dateStart DATE, IN daysLong SMALLINT)
+            DROP PROCEDURE IF EXISTS `get_free_rooms`;
+            CREATE PROCEDURE get_free_rooms(IN dateStart DATE, IN daysLong SMALLINT)
             BEGIN
                 DECLARE dateCurrent DATE DEFAULT dateStart;
                 DECLARE rangeDayCounter SMALLINT DEFAULT 0;
@@ -38,7 +38,7 @@ return new class extends Migration
                         END WHILE;
                 END IF;
                 SELECT * FROM rooms WHERE id NOT IN (SELECT room_id FROM reserved_rooms_ids GROUP BY room_id);
-                DROP TABLE reserved_rooms_ids;
+                DROP TABLE reserved_rooms;
             END;
         ';
         DB::unprepared($procedure);
