@@ -39,6 +39,7 @@ class ReservationService implements DateRangeStringInterface
      */
     public function list(string $dateRange): array
     {
+        //TODO add pagination
         $dateFrom = $this->dateFrom($dateRange);
         $durationInDays = $this->durationInDays($dateRange);
         return DB::select('CALL get_reservation(:dateFrom, :durationInDays)',
