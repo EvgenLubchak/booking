@@ -28,4 +28,9 @@ Route::prefix('reservation')->group(function () {
     Route::get('/link/{reservation}', [ReservationController::class, 'link'])
         ->where('reservation', '[0-9]+')
         ->name('reservation.link');
+    //TODO test route
+    Route::get('/delete/{reservation}', [ReservationController::class, 'delete'])
+        ->where('reservation', '[0-9]+')
+        ->name('reservation.delete');
+    //TODO
 });

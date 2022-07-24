@@ -12,31 +12,35 @@ return new class extends Migration
      */
     public function up()
     {
-        $procedure = 'DROP PROCEDURE IF EXISTS `get_free_rooms`;
-                CREATE PROCEDURE get_free_rooms(IN dateStart DATE, IN daysLong TINYINT)
-                BEGIN
-                    DECLARE dateCurren DATE DEFAULT dateStart;
-                    DECLARE dateNext DATE;
-                    DECLARE dateCounter TINYINT DEFAULT 0;
-                    DECLARE rangeFinalDay DATE DEFAULT DATE_ADD(dateCurren, INTERVAL daysLong DAY);
-                    CREATE TEMPORARY TABLE IF NOT EXISTS reserved_rooms_ids (room_id INT);
-                    TRUNCATE reserved_rooms_ids;
-                       WHILE dateCounter < daysLong DO
-                                SET dateNext = DATE_ADD(dateCurren, INTERVAL 1 DAY);
-                                INSERT INTO reserved_rooms_ids
-                                    (
-                                        SELECT room_id FROM reservations
-                                            WHERE dateCurren
-                                            BETWEEN date_from AND date_to AND dateNext != rangeFinalDay
-                                            OR dateNext
-                                            BETWEEN date_from AND date_to
-                                    );
-                                SET dateCounter = dateCounter + 1;
-                                SET dateCurren = dateNext;
-                            END WHILE;
-                    SELECT * FROM rooms WHERE id NOT IN (SELECT room_id FROM reserved_rooms_ids GROUP BY room_id);
-                    DROP TABLE reserved_rooms_ids;
-                END;';
+        $procedure = '
+            DROP PROCEDURE IF EXISTS `get_reserved_rooms_ids`;
+            CREATE PROCEDURE get_reserved_rooms_ids(IN dateStart DATE, IN daysLong SMALLINT)
+            BEGIN
+                DECLARE dateCurrent DATE DEFAULT dateStart;
+                DECLARE rangeDayCounter SMALLINT DEFAULT 0;
+                CREATE TEMPORARY TABLE IF NOT EXISTS reserved_rooms_ids (room_id INT);
+                TRUNCATE reserved_rooms_ids;
+                IF daysLong = 0 THEN
+                    INSERT INTO reserved_rooms_ids
+                        (
+                            SELECT room_id FROM reservations
+                            WHERE date_from <= dateStart AND date_to >= dateStart
+                        );
+                ELSE
+                    WHILE rangeDayCounter <= daysLong DO
+                            INSERT INTO reserved_rooms_ids
+                                (
+                                    SELECT room_id FROM reservations
+                                    WHERE date_from <= dateCurrent AND date_to >= dateCurrent
+                                );
+                            SET rangeDayCounter = rangeDayCounter + 1;
+                            SET dateCurrent = DATE_ADD(dateCurrent, INTERVAL 1 DAY);
+                        END WHILE;
+                END IF;
+                SELECT * FROM rooms WHERE id NOT IN (SELECT room_id FROM reserved_rooms_ids GROUP BY room_id);
+                DROP TABLE reserved_rooms_ids;
+            END;
+        ';
         DB::unprepared($procedure);
     }
 
@@ -47,6 +51,6 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP PROCEDURE IF EXISTS `get_free_rooms`');
+        DB::unprepared('DROP PROCEDURE IF EXISTS get_free_rooms');
     }
 };
