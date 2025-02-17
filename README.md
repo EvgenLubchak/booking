@@ -51,5 +51,3 @@ Create 50 rooms
 ```
 ./vendor/bin/sail php artisan create:rooms 50
 ```
-
-
